@@ -1,0 +1,24 @@
+
+  <nav class="navbar navbar-inverse bg-dark navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Employment Portal</a>
+      
+        <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item" *ngIf="path === '/' || path === '/employee-register'">
+                <a routerLink="/employee-list">Employee list</a>
+            </li>
+            <li class="nav-item" *ngIf="path === '/employee-list'">
+                <a routerLink="/employee-register" id="employee-reg">Employee register</a>
+            </li>
+        </ul>
+        
+    </div>
+  </nav>
+  
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+  </div>

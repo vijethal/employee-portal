@@ -1,0 +1,61 @@
+<div class="col-lg-6 employee-registration">
+    <form #employeeForm="ngForm" class="formContainer" novalidate>
+        <h2 class="pb-4">Employee registration</h2>
+
+        <div class="form-group" ngModelGroup="name">
+            <div class="row">
+                <div class="col">
+                    <label class="font-weight-bold">First name</label>
+                    <input type="text" class="form-control" name="firstName" placeholder="First Name"
+                        [(ngModel)]="employee.firstName" required="required" #firstName="ngModel" [ngClass]="{
+                            'border-danger': firstName.invalid && (firstName.dirty || firstName.touched),
+                            'border-success': firstName.valid && (firstName.dirty || firstName.touched)
+                       }">
+                </div>
+                <div class="col">
+                    <label class="font-weight-bold">Last name</label>
+                    <input type="text" class="form-control" name="lastName" placeholder="Last Name"
+                        [(ngModel)]="employee.lastName" required="required" #lastName="ngModel"
+                        [ngClass]="{
+                            'border-danger': lastName.invalid && (lastName.dirty || lastName.touched),
+                            'border-success': lastName.valid && (lastName.dirty || lastName.touched)
+                       }">
+                </div>
+            </div>
+        </div>
+        <div class="form-group pt-1">
+            <label class="font-weight-bold">Gender</label>
+            <div class="row pl-1">
+                <label class="radio-inline ml-3"><input type="radio" name="Male" value="Female"
+                        [(ngModel)]="employee.gender">&nbsp;Male</label>
+                <label class="radio-inline ml-3"><input type="radio" name="gender" value="Female"
+                        [(ngModel)]="employee.gender">&nbsp;Female</label>
+                <label class="radio-inline ml-3"><input type="radio" name="gender" value="Other"
+                        [(ngModel)]="employee.gender">&nbsp;Other</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="font-weight-bold">DOB</label>
+            <input type="date" class="form-control" name="dob" placeholder="mm/dd/yyyy" [(ngModel)]="employee.dob"
+                required="required">
+        </div>
+        <div class="form-group">
+            <label class="font-weight-bold">Department</label>
+            <select name="department" class="form-control" [(ngModel)]="employee.department" required>
+                <option value="undefined" selected disabled>Select department</option>
+                <option *ngFor="let dept of department">{{dept.name}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary" id="btn-submit" type="button" name="submitBtn"
+                [disabled]="!employeeForm.valid || loader" (click)="onSubmit(); employeeForm.reset();">Register</button>
+            <button class="btn" type="reset">Reset</button>
+        </div>
+    </form>
+
+    <ng-container *ngIf="loader">
+        loading ...
+    </ng-container>
+
+</div>

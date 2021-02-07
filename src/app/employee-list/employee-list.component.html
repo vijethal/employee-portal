@@ -1,0 +1,36 @@
+<div class="employee-list">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Gender</th>
+                <th scope="col">DOB</th>
+                <th scope="col">Department</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of employees">
+                <td>{{ employee.firstName }} </td>
+                <td>{{ employee.gender}}</td>
+                <td>{{ employee.dob | date:'MM/dd/yyyy' }}</td>
+                <td>{{ employee.department }} </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between p-2" *ngIf="!loader; else loaderTemp">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+            (pageChange)="loadEmployees()">
+        </ngb-pagination>
+
+        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="loadEmployees()">
+            <option [value]="2">2 items per page</option>
+            <option [value]="4">4 items per page</option>
+            <option [value]="6">6 items per page</option>
+        </select>
+    </div>
+
+
+    <ng-template #loaderTemp> loading ...</ng-template>
+
+</div>
